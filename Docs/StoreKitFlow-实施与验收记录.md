@@ -1,6 +1,6 @@
 # StoreKitFlow 2.0 实施与验收记录
 
-实施与验证日期：2026-11-05 至 2026-11-06（Asia/Shanghai）。本记录对应当前工作区，尚未提交 Git commit、创建 tag、推送远端或发布 CocoaPods。
+实施与验证日期：2026-11-05 至 2026-11-06（Asia/Shanghai）。本记录描述该时段的本地验收结果，发布状态以 Git 标签和 CocoaPods trunk 的实际记录为准。
 
 已按确认完成购买核心、SwiftUI 示例、分发准备和文档重构。用户随后确认保留原版 Swift 多语言方案，`SubscriptionLocale` 已恢复；见 [使用说明](StoreKitFlow-旧版多语言使用说明.md)。
 

@@ -1,6 +1,6 @@
 # StoreKitFlow
 
-Swift 6 的 StoreKit 2 封装与 SwiftUI 示例。公开入口为 `StoreClient`；这是从 StoreKit2Manager 到 **2.0 的 API 重构，当前尚未发布**。
+Swift 6 的 StoreKit 2 封装与 SwiftUI 示例。公开入口为 `StoreClient`；2.0 是从 StoreKit2Manager 到 StoreKitFlow 的 API 重构。
 
 支持 iOS / iPadOS 17+；macOS 14+ 支持核心查询、购买、权益和账本，示例及 Scene 系统界面适配为 iOS。已验证工具链为 **Xcode 27.2 / Swift 6.4.2**；使用 Swift 6 language mode，不承诺所有旧版 Swift 6 SDK 均可编译。
 
@@ -27,7 +27,13 @@ Swift 6 的 StoreKit 2 封装与 SwiftUI 示例。公开入口为 `StoreClient`�
 
 ## SPM 接入
 
-当前可以通过 Xcode 的 **Add Local Package** 选择本目录，添加产品 `StoreKitFlow`。发布 2.0 tag 后才能按对应版本从远端添加；本文不提供尚未存在的已发布版本承诺。
+在 Xcode 中添加 `https://github.com/ppswdev/StoreKitFlow.git`，选择 2.0.0 及以上的 2.x 版本，并添加产品 `StoreKitFlow`。也可以在 `Package.swift` 中声明：
+
+```swift
+.package(url: "https://github.com/ppswdev/StoreKitFlow.git", from: "2.0.0")
+```
+
+本地开发也可以通过 Xcode 的 **Add Local Package** 选择本目录。
 
 ```swift
 import StoreKitFlow
@@ -69,8 +75,14 @@ xcodebuild -workspace StoreKitFlow.xcworkspace -scheme StoreKitFlowExample \
 
 [文档导航](Docs/README.md) · [已确认决策](Docs/StoreKitFlow-决策记录.md) · [时序图与流程图](Docs/Swift6-StoreKit2-时序图与流程图.md) · [任务与验收矩阵](Docs/Swift6-StoreKit2-任务拆分与验收.md)
 
-本地模块、工程和 podspec 已使用 StoreKitFlow；远端仓库 URL 暂仍为 `ppswdev/StoreKit2Manager`。仓库改名、SPM 模块改名、CocoaPods 名称变更是三件独立的事。保留旧 tag 可供旧用户继续依赖；新版本 `import StoreKitFlow` 属于破坏性变更，应以 2.0 发布。旧版本不能原地改 tag。无需为此次重构修改已有生产商品 ID。
+本地模块、工程、podspec 和远端仓库已使用 StoreKitFlow，仓库地址为 `https://github.com/ppswdev/StoreKitFlow`。仓库改名、SPM 模块改名、CocoaPods 名称变更是三件独立的事。保留旧 tag 可供旧用户继续依赖；新版本 `import StoreKitFlow` 属于破坏性变更，应以 2.0 发布。旧版本不能原地改 tag。无需为此次重构修改已有生产商品 ID。
 
-`upgrade_ver.sh` 仅准备本地版本并验证，不会自动提交、打 tag、推送或发布。CocoaPods 的 `StoreKitFlow.podspec` 是新名称的发布准备文件；尚未发布到 trunk。
+`upgrade_ver.sh` 仅准备本地版本并验证，不会自动提交、打 tag、推送或发布。CocoaPods 用户可以通过 Git 标签使用仓库中的 podspec：
+
+```ruby
+pod 'StoreKitFlow', :git => 'https://github.com/ppswdev/StoreKitFlow.git', :tag => '2.0.0'
+```
+
+是否可以直接使用公开 trunk 的 `pod 'StoreKitFlow'` 取决于该版本是否已发布至 trunk。
 
 MIT License.

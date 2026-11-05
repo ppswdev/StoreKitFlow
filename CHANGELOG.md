@@ -1,12 +1,12 @@
 # Changelog
 
-## [2.0.0] — Unreleased
+## [2.0.0] — 2026-11-06
 
 - 重命名为 StoreKitFlow，公开入口 StoreClient，Swift 6 / Observation。
 - 统一购买、补单、验证、交付、撤销和权益聚合，持久化消耗品账本。
 - 增加 Pro 三态、订阅状态、Scene 系统入口、优惠选择和可选后端扩展。
 - 重建 SwiftUI 示例、规则测试、StoreKitTest 和接入文档；按确认保留原版 SubscriptionLocale 多语言代码。
-- 最低 iOS 17 / macOS 14 核心；旧 API 移除。尚未发布任何 tag 或包。
+- 最低 iOS 17 / macOS 14 核心；旧 API 移除。
 
 ## [1.1.2]
 
