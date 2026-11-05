@@ -104,8 +104,8 @@ let presentation = SubscriptionLocale.presentation(
 2. 兼容旧 `zh_Hans` / `zh_Hant` 输入，内部使用标准语言标识。通过系统语言匹配处理地区和 script，不能简单 `split("-").first` 后丢掉简繁体。
 3. 语言优先级：调用方显式设置 → SwiftUI 传入的 locale / App 选定语言 → 支持语言匹配 → 英语。货币不随这个回退链改变。
 4. 用完整句子的 String Catalog 模板表达参数、复数和语序，避免把翻译过的单词拼接成句子。String Catalog 支持按语言提供 plural 变体。[Apple String Catalog 文档](https://developer.apple.com/documentation/xcode/localizing-and-varying-text-with-a-string-catalog)
-5. App 可通过自己的 Bundle 和资源表覆盖。SPM 使用包资源 Bundle，CocoaPods 使用命名资源 bundle，不能默认所有字符串都在 Bundle.main。[Swift 包资源](https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package)
-6. 资源分发同时验证 Xcode、命令行 `swift test` 和 CocoaPods。若某条构建链不能直接编译 xcstrings，则从同一 Catalog 在发布准备阶段生成标准 lproj / stringsdict 资源，不手工维护两份翻译。
+5. App 可通过自己的 Bundle 和资源表覆盖。SPM 使用包资源 Bundle，不能默认所有字符串都在 Bundle.main。[Swift 包资源](https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package)
+6. 资源分发需验证 Xcode 和命令行 `swift test`。若构建链不能直接编译 xcstrings，则从同一 Catalog 在发布准备阶段生成标准 lproj / stringsdict 资源，不手工维护两份翻译。
 7. App 内切换语言后重算 presentation；storefront/商品/优惠资格改变后也重算。缓存键包含相关目录版本、语言、选择和状态，不能只按 productID 缓存字符串。
 8. 保留原语言覆盖，但需要按语言校对，特别是旧版俄语、波兰语、阿拉伯语的复数和中文计费措辞；自动测试通过不能代替母语文案校对。
 

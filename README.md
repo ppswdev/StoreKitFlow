@@ -69,20 +69,12 @@ xcodebuild -workspace StoreKitFlow.xcworkspace -scheme StoreKitFlowExample \
   -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
 ```
 
-请替换为本机实际可用的模拟器。具体通过情况、待真实环境验证项和复现命令见 [实施与验收记录](Docs/StoreKitFlow-实施与验收记录.md)。
+请替换为本机实际可用的模拟器。新克隆仓库的命令行集成测试曾在 iOS 27.2 模拟器上弹出 Apple 账户登录并超时；本地 StoreKit 测试不应要求登录，请取消弹窗并核对测试环境。该问题尚未定位，具体记录、此前通过情况和待真实环境验证项见 [实施与验收记录](Docs/StoreKitFlow-实施与验收记录.md)。
 
 ## 文档与发布
 
 [文档导航](Docs/README.md) · [已确认决策](Docs/StoreKitFlow-决策记录.md) · [时序图与流程图](Docs/Swift6-StoreKit2-时序图与流程图.md) · [任务与验收矩阵](Docs/Swift6-StoreKit2-任务拆分与验收.md)
 
-本地模块、工程、podspec 和远端仓库已使用 StoreKitFlow，仓库地址为 `https://github.com/ppswdev/StoreKitFlow`。仓库改名、SPM 模块改名、CocoaPods 名称变更是三件独立的事。保留旧 tag 可供旧用户继续依赖；新版本 `import StoreKitFlow` 属于破坏性变更，应以 2.0 发布。旧版本不能原地改 tag。无需为此次重构修改已有生产商品 ID。
-
-`upgrade_ver.sh` 仅准备本地版本并验证，不会自动提交、打 tag、推送或发布。CocoaPods 用户可以通过 Git 标签使用仓库中的 podspec：
-
-```ruby
-pod 'StoreKitFlow', :git => 'https://github.com/ppswdev/StoreKitFlow.git', :tag => '2.0.0'
-```
-
-是否可以直接使用公开 trunk 的 `pod 'StoreKitFlow'` 取决于该版本是否已发布至 trunk。
+模块、工程和远端仓库使用 StoreKitFlow。旧 tag 保留；新版本 `import StoreKitFlow` 是破坏性变更。旧版本不能原地改 tag，无需因本次重构修改已有生产商品 ID。2.0 使用 SPM 分发。
 
 MIT License.

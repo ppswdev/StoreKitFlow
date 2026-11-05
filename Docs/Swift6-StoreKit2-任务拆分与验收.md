@@ -18,7 +18,7 @@
 | T10 | P1 | 自有账号和服务端扩展：AccountPolicy、DeliveryHandler、OfferSigner、签名证据、Fake 后端 | T03、T04、T06 | 账号切换不串单；未知归属不 finish；幂等/超时/乱序契约可演示 |
 | T11 | P1 | SwiftUI 示例：商品、详情、Pro、订单/账本、管理/退款、错误与事件时间线、Preview | T03、T06–T10 | 四类产品均有完整演示；不出现提前成功/误解锁/永久 loading |
 | T12 | P0 发布门槛 | Swift Testing 领域测试、XCTest + StoreKitTest 集成、UI 检查、Sandbox 验收清单 | 随 T02–T11 开发 | 关键案例自动化；真实账号依赖项目标明待验证，不假报通过 |
-| T13 | P1 | API 迁移、日志脱敏、JSON schema、README/Docs 重写、SPM 与 CocoaPods 发布准备 | T11、T12 | 示例代码可编译；文档与 API 一致；所有主线构建通过；不自动发布 |
+| T13 | P1 | API 迁移、日志脱敏、JSON schema、README/Docs 重写、SPM 发布准备 | T11、T12 | 示例代码可编译；文档与 API 一致；所有主线构建通过 |
 | T14 | 条件范围 | SDK 27 组合/套件订阅、承诺期、分期/部分退款、Advanced Commerce 能力评估与适配 | T02、T03、T06；真实商品/文档 | 先给能力和测试结论；具备条件再实现专用策略，不能用普通订阅兜底 |
 | T15 | 条件范围 | iOS 15/16、tvOS、watchOS、visionOS 及更多原生 UI 平台适配 | 主线稳定 | 每个平台编译及可用性测试通过后才更新支持矩阵 |
 
@@ -153,9 +153,9 @@ M4 放行必须满足：
 - 编译、规则测试、交付恢复、StoreKit 本地集成通过；真实环境未验项目明确列出。
 - 应用无须设置 `isPro` 即能从快照正确解锁；UI 关闭不影响必要的交易恢复。
 - 无提前 finish、重复发货、无依据的免费试用承诺或退款成功提示。
-- 支持矩阵与 Package、podspec、工程配置一致。
+- 支持矩阵与 Package 和工程配置一致。
 - README、旧 Docs、示例不再使用已经删除的接口。
-- 未自动提交商店、发布 CocoaPods、创建 Git tag 或推送远端。
+- 不自动提交商店；发布 Git 标签和推送依据用户授权执行。
 
 ## 5. 迁移和回滚策略
 

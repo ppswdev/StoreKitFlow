@@ -1,6 +1,6 @@
 # StoreKitFlow 2.0 实施与验收记录
 
-实施与验证日期：2026-11-05 至 2026-11-06（Asia/Shanghai）。本记录描述该时段的本地验收结果，发布状态以 Git 标签和 CocoaPods trunk 的实际记录为准。
+实施与验证日期：2026-11-05 至 2026-11-06（Asia/Shanghai）。本记录描述该时段的本地验收结果，发布状态以 Git 标签的实际记录为准。
 
 已按确认完成购买核心、SwiftUI 示例、分发准备和文档重构。用户随后确认保留原版 Swift 多语言方案，`SubscriptionLocale` 已恢复；见 [使用说明](StoreKitFlow-旧版多语言使用说明.md)。
 
@@ -20,7 +20,7 @@
 | T10 后端扩展 | 按最终确认只保留 TransactionValidator / DeliveryHandler / OfferSigner；无账号系统、无默认服务器请求，不实现 AccountPolicy 系统 |
 | T11 示例 | 商品分类/详情、Pro、订阅状态、余额、历史/退款、管理/恢复、交付重试、意向、Debug 事件和离线预览 |
 | T12 验证 | 领域自动化、本地 StoreKit 系统交易验证、示例构建；真实沙盒、最低 OS 运行和人工多语言/无障碍仍待验 |
-| T13 分发/文档 | README、API/决策/验收、8 张时序/流程图、JSON 导出、podspec、仅本地操作的版本脚本；1.x 文档移到 Archive |
+| T13 分发/文档 | SPM、README、API/决策/验收、8 张时序/流程图、JSON 导出；1.x 文档移到 Archive |
 | T14/T15 | 条件任务尚未实施：SDK 27 组合/套件和 Advanced Commerce；其他平台与旧系统 |
 
 实现把 TransactionProcessor 的职责合并在 StoreCoordinator，Scene 入口合并在 StoreClient。时间依赖是可注入的 Sendable 闭包。库默认没有日志输出，未增加一个无用途的日志框架。原 API 草案中的 AccountPolicy、多等级会员和完整服务器不是本轮最终确认范围。
@@ -35,13 +35,12 @@
 | 检查 | 结果 |
 |---|---|
 | Swift Testing | **47 项通过**，部分测试含参数化场景；不是宣称原矩阵 63 项全部通过 |
-| XCTest + StoreKitTest | **6 项通过**，全部由示例 App 承载并串行执行 |
+| XCTest + StoreKitTest | 之前在原目录有 **6 项通过**；新克隆仓库复测未通过，见下方环境限制 |
 | iOS 示例 | Swift 6 模拟器构建成功；实际通过本地 SPM 引用核心；离线预览主屏视觉检查通过 |
-| CocoaPods | `pod lib lint` 完整 iOS + macOS 编译校验通过；不是只做 podspec 语法检查 |
 | Mermaid | 8/8 语法与 SVG 渲染通过，初始化图另做视觉核对 |
 | Git diff | 格式检查无空白错误；没有自动提交或发布 |
 
-SDK 的 StoreKitTest Objective-C 头存在 SKPaymentTransactionState 弃用提示，AppIntents 元数据工具提示无相关框架而跳过；不属于项目的 Swift 6 并发错误。CocoaPods 不显式链接不存在的 Observation.framework，Swift 导入负责其运行库链接。
+SDK 的 StoreKitTest Objective-C 头存在 SKPaymentTransactionState 弃用提示，AppIntents 元数据工具提示无相关框架而跳过；不属于项目的 Swift 6 并发错误。
 
 ### 2.1 领域测试覆盖
 
@@ -59,6 +58,8 @@ pending 跨 stop/start 保留；购买取消保留 Pro；启动不 sync；恢复
 4. 原生 Product 购买结果回传同一流水线，重复回传不重复增加余额。
 5. 消耗品退款后扣回本地可用余额。
 6. 订阅退款只移除对应来源，终身 Pro 保持有效。
+
+2026-11-06 在新克隆目录进行发布前复测时，iOS 27.2 模拟器出现 Apple 账户登录弹窗，导致测试宿主无法取得前台窗口或购买用例超时；换用新的模拟器和调整测试计划尝试后仍未解决。本次复测没有通过，不能用此前的 6 项结果代替。无需在本地测试中输入 Apple 账号；该测试环境问题尚需进一步定位。
 
 测试配置使用显式 StoreKit test plan 和 App 宿主。单独把 SKTestSession 放在没有 App 的 SPM xctest runner 中不作为有效集成环境。强制 expire 的试验曾在本机保持旧的 subscribed/到期数据；最终到期测试采用 Apple 支持的加速时间自然到期，不把模拟器内部状态当作生产逻辑修正依据。
 
@@ -98,12 +99,11 @@ xcodebuild -workspace StoreKitFlow.xcworkspace -scheme StoreKitFlowExample \
   -derivedDataPath /private/tmp/StoreKitFlow-integration \
   -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
 
-pod lib lint StoreKitFlow.podspec --allow-warnings --skip-tests --platforms=ios,macos
 ```
 
-本机日志位于 `/private/tmp/StoreKitFlow-build-final.log`、`/private/tmp/StoreKitFlow-reviewed.log`、`/private/tmp/StoreKitFlow-pod-final.log`。集成结果包为 `/private/tmp/StoreKitFlow-reviewed.xcresult`。这些是本机临时验证产物，不作为 SDK 资源分发。
+本机日志位于 `/private/tmp/StoreKitFlow-build-final.log`、`/private/tmp/StoreKitFlow-reviewed.log`。集成结果包为 `/private/tmp/StoreKitFlow-reviewed.xcresult`。这些是本机临时验证产物，不作为 SDK 资源分发。
 
-发布前不要依赖临时目录长期保存证据，应在发布 PR 或 CI 中重新运行并保留产物。`upgrade_ver.sh` 不会替你提交、打 tag、推送或发布。
+发布前不要依赖临时目录长期保存证据，应在发布 PR 或 CI 中重新运行并保留产物。
 
 ### 示例布局证据
 
