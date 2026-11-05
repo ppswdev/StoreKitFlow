@@ -1,0 +1,33 @@
+{
+  "configurations": [
+    {
+      "id": "8780d1a2-1cf7-4d0e-9bc8-80517779ec09",
+      "name": "Local StoreKit",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "storeKitConfigurationFileReference": {
+      "identifier": "container:Example/StoreProducts.storekit"
+    },
+    "environmentVariableEntries": [
+      {
+        "key": "STOREKITFLOW_TEST_HOST",
+        "value": "1"
+      }
+    ],
+    "testTimeoutsEnabled": true,
+    "defaultTestExecutionTimeAllowance": 60
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:StoreKitFlow.xcodeproj",
+        "identifier": "B00000000000000000000012",
+        "name": "StoreKitFlowStoreKitTests"
+      },
+      "parallelizable": false
+    }
+  ],
+  "version": 1
+}
