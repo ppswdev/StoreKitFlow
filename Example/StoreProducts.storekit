@@ -75,11 +75,16 @@
     }
   ],
   "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
     "_compatibilityTimeRate" : {
       "3" : 6
     },
+    "_disableDialogs" : false,
     "_failTransactionsEnabled" : false,
     "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "USA",
     "_storeKitErrors" : [
       {
@@ -147,13 +152,19 @@
         "name" : "Refund Request Sheet"
       },
       {
-        "current" : null,
+        "current" : {
+          "index" : 4,
+          "type" : "generic"
+        },
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
     ],
     "_timeRate" : 1002
   },
+  "subscriptionBundleGroups" : [
+
+  ],
   "subscriptionGroups" : [
     {
       "id" : "732E29F2",
@@ -165,13 +176,16 @@
         {
           "adHocOffers" : [
             {
+              "billingPlanType" : "BILLED_UPFRONT",
               "internalID" : "6095930C",
+              "numberOfPeriods" : 1,
               "offerID" : "free1week",
               "paymentMode" : "free",
               "referenceName" : "限时免费",
               "subscriptionPeriod" : "P1W"
             },
             {
+              "billingPlanType" : "BILLED_UPFRONT",
               "displayPrice" : "1.99",
               "internalID" : "574B5C53",
               "numberOfPeriods" : 1,
@@ -181,12 +195,23 @@
               "subscriptionPeriod" : "P1W"
             },
             {
+              "billingPlanType" : "BILLED_UPFRONT",
               "displayPrice" : "5.99",
               "internalID" : "4BF6A6FE",
+              "numberOfPeriods" : 1,
               "offerID" : "payupfront1month",
               "paymentMode" : "payUpFront",
               "referenceName" : "提前预付",
               "subscriptionPeriod" : "P1M"
+            }
+          ],
+          "billingPlans" : [
+            {
+              "billingPlanType" : "BILLED_UPFRONT",
+              "commitmentDisplayPrice" : "9.99",
+              "displayPrice" : "9.99",
+              "internalID" : "D165E3A3",
+              "isEnabled" : true
             }
           ],
           "codeOffers" : [
@@ -197,11 +222,23 @@
           "groupNumber" : 1,
           "internalID" : "D7180163",
           "introductoryOffer" : {
+            "billingPlanType" : "BILLED_UPFRONT",
             "displayPrice" : "0.99",
             "internalID" : "19311780",
+            "numberOfPeriods" : 1,
             "paymentMode" : "free",
             "subscriptionPeriod" : "P3D"
           },
+          "introductoryOffers" : [
+            {
+              "billingPlanType" : "BILLED_UPFRONT",
+              "displayPrice" : "0.99",
+              "internalID" : "19311780",
+              "numberOfPeriods" : 1,
+              "paymentMode" : "free",
+              "subscriptionPeriod" : "P3D"
+            }
+          ],
           "localizations" : [
             {
               "description" : "Weekly VIP of in app",
@@ -216,23 +253,28 @@
           "type" : "RecurringSubscription",
           "winbackOffers" : [
             {
+              "billingPlanType" : "BILLED_UPFRONT",
               "internalID" : "6EF60F3E",
               "isEligible" : true,
+              "numberOfPeriods" : 1,
               "offerID" : "user_winback_freetrail",
               "paymentMode" : "free",
               "referenceName" : "回归特惠-免费试用",
               "subscriptionPeriod" : "P3D"
             },
             {
+              "billingPlanType" : "BILLED_UPFRONT",
               "displayPrice" : "0.99",
               "internalID" : "49B6E4C4",
               "isEligible" : true,
+              "numberOfPeriods" : 1,
               "offerID" : "user_winback_payupfront",
               "paymentMode" : "payUpFront",
               "referenceName" : "回归特惠-提前预付",
               "subscriptionPeriod" : "P1M"
             },
             {
+              "billingPlanType" : "BILLED_UPFRONT",
               "displayPrice" : "1.99",
               "internalID" : "027B653C",
               "isEligible" : true,
@@ -248,6 +290,15 @@
           "adHocOffers" : [
 
           ],
+          "billingPlans" : [
+            {
+              "billingPlanType" : "BILLED_UPFRONT",
+              "commitmentDisplayPrice" : "39.99",
+              "displayPrice" : "39.99",
+              "internalID" : "3DB8D9B4",
+              "isEnabled" : true
+            }
+          ],
           "codeOffers" : [
 
           ],
@@ -256,10 +307,21 @@
           "groupNumber" : 1,
           "internalID" : "B16ABC04",
           "introductoryOffer" : {
+            "billingPlanType" : "BILLED_UPFRONT",
             "internalID" : "4C9FF7DF",
+            "numberOfPeriods" : 1,
             "paymentMode" : "free",
             "subscriptionPeriod" : "P3D"
           },
+          "introductoryOffers" : [
+            {
+              "billingPlanType" : "BILLED_UPFRONT",
+              "internalID" : "4C9FF7DF",
+              "numberOfPeriods" : 1,
+              "paymentMode" : "free",
+              "subscriptionPeriod" : "P3D"
+            }
+          ],
           "localizations" : [
             {
               "description" : "Monthly VIP of in app",
@@ -280,6 +342,15 @@
           "adHocOffers" : [
 
           ],
+          "billingPlans" : [
+            {
+              "billingPlanType" : "BILLED_UPFRONT",
+              "commitmentDisplayPrice" : "69.99",
+              "displayPrice" : "69.99",
+              "internalID" : "BDD50054",
+              "isEnabled" : true
+            }
+          ],
           "codeOffers" : [
 
           ],
@@ -288,10 +359,21 @@
           "groupNumber" : 1,
           "internalID" : "194AEF91",
           "introductoryOffer" : {
+            "billingPlanType" : "BILLED_UPFRONT",
             "internalID" : "C06A3A9D",
+            "numberOfPeriods" : 1,
             "paymentMode" : "free",
             "subscriptionPeriod" : "P1W"
           },
+          "introductoryOffers" : [
+            {
+              "billingPlanType" : "BILLED_UPFRONT",
+              "internalID" : "C06A3A9D",
+              "numberOfPeriods" : 1,
+              "paymentMode" : "free",
+              "subscriptionPeriod" : "P1W"
+            }
+          ],
           "localizations" : [
             {
               "description" : "Yearly vip of in app",
@@ -315,8 +397,11 @@
     "id" : "5CAE6E5F",
     "privateKey" : "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgXqA0nmSLzTjCbeWl3gGT3bLB5LrxtjKeziWk+wdJe/egCgYIKoZIzj0DAQehRANCAAQe7tLCIJuwmwOiB8MEU29kV6BetPEN/hctR1zDSjpIhlpNzcs1FXIriQZO/qDZvmcPudbmmrEsc/Mee41gIDJ7"
   },
+  "subscriptionSuiteGroups" : [
+
+  ],
   "version" : {
-    "major" : 4,
-    "minor" : 0
+    "major" : 6,
+    "minor" : 3
   }
 }

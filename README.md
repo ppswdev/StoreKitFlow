@@ -73,7 +73,7 @@ xcodebuild -workspace StoreKitFlow.xcworkspace -scheme StoreKitFlowExample \
 
 ## 文档与发布
 
-[文档导航](Docs/README.md) · [已确认决策](Docs/StoreKitFlow-决策记录.md) · [时序图与流程图](Docs/Swift6-StoreKit2-时序图与流程图.md) · [任务与验收矩阵](Docs/Swift6-StoreKit2-任务拆分与验收.md)
+[文档导航](Docs/README.md) · [SPM 发布教程](Docs/StoreKitFlow-SPM发布教程.md) · [已确认决策](Docs/StoreKitFlow-决策记录.md) · [时序图与流程图](Docs/Swift6-StoreKit2-时序图与流程图.md) · [任务与验收矩阵](Docs/Swift6-StoreKit2-任务拆分与验收.md)
 
 模块、工程和远端仓库使用 StoreKitFlow。旧 tag 保留；新版本 `import StoreKitFlow` 是破坏性变更。旧版本不能原地改 tag，无需因本次重构修改已有生产商品 ID。2.0 使用 SPM 分发。
 

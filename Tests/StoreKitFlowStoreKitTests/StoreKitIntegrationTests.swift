@@ -15,6 +15,8 @@ final class StoreKitIntegrationTests: XCTestCase {
     @MainActor private func setupStore() async throws -> (SKTestSession, StoreClient) {
         let url = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "StoreProducts", withExtension: "storekit"))
         let session = try SKTestSession(contentsOf: url)
+        // Restore dialog, Ask to Buy and renewal settings even when a test fails.
+        addTeardownBlock { session.resetToDefaultState() }
         session.resetToDefaultState(); session.disableDialogs = true; session.timeRate = .realTime; session.clearTransactions()
         let configuration = StoreConfiguration(products: [
             .init(coinID, kind: .consumable, credits: 10),

@@ -162,12 +162,13 @@ struct StoreDemoView: View {
                 #endif
             }
             .navigationTitle("StoreKitFlow")
-            .background(SceneReader { value in scene = value; store.setPurchaseScene(value) }.frame(width: 0, height: 0))
             .task { for await event in store.events() { events.insert(event, at: 0); if events.count > 100 { events.removeLast() } } }
             .alert("操作结果", isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {
                 Button("好", role: .cancel) { message = nil }
             } message: { Text(message ?? "") }
         }
+        // Keep the reader attached while the navigation stack presents a detail page.
+        .background(SceneReader { value in scene = value; store.setPurchaseScene(value) }.frame(width: 0, height: 0))
     }
     private var missingScene: StoreFailure { .init(.presentationUnavailable, "窗口未就绪") }
     private var proTitle: String { switch store.proStatus.access { case .active: "Pro 已激活"; case .inactive: "尚无 Pro 权益"; case .unknown: "正在核实 Pro 权益" } }
